@@ -29,18 +29,9 @@ builder.Services.AddSwaggerGen(c =>
     });
 });
 
-// Add this to your service configuration in Program.cs
-builder.Services.AddCors(options =>
-{
-    options.AddPolicy("AllowAll", builder =>
-    {
-        builder.AllowAnyOrigin()
-            .AllowAnyMethod()
-            .AllowAnyHeader();
-    });
-});
-
-
+// Add this to your service configuration
+builder.Services.AddHttpClient();
+builder.Services.AddScoped( sp => new HttpClient {BaseAddress = new Uri( "https://localhost:44330" )} );
 
 var app = builder.Build();
 
